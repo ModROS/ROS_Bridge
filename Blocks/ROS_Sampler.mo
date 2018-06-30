@@ -1,0 +1,12 @@
+within ROS_Bridge.Blocks;
+
+block ROS_Sampler "Samples from a ROS socket, via the external C function"
+  extends Modelica.Blocks.Interfaces.DiscreteMIMO;
+  parameter Integer portNumber = 9090 "port number for tcp/ip connection with ROS" annotation(Dialog(group = "External Connection Parameters"));
+  parameter String hostName = "localhost" "ip of host (use localhost for 127.0.0.1)" annotation(Dialog(group = "External Connection Parameters"));
+equation
+  when sampleTrigger then
+    y = ROS_Bridge.Blocks.Internal.ROS_Socket_Call(time, portNumber, hostName, nin, nout, u);
+  end when annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {10, 10})), Diagram(coordinateSystem(extent = {{-148.5, -105}, {148.5, 105}}, preserveAspectRatio = true, initialScale = 0.1, grid = {5, 5})));
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {10, 10}), graphics = {Line(visible = true, origin = {2.151, 0}, points = {{0, 100}, {0, -100}}, pattern = LinePattern.Dot, thickness = 2.5), Rectangle(visible = true, origin = {-48.744, -0}, fillColor = {255, 0, 0}, fillPattern = FillPattern.Solid, extent = {{-38.744, -36.155}, {38.744, 36.155}}), Line(visible = true, origin = {7.729, 0}, points = {{-17.729, 0}, {17.729, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dash, thickness = 1), Ellipse(visible = true, origin = {78, 40}, fillColor = {0, 255, 127}, fillPattern = FillPattern.Solid, extent = {{-12, -12}, {12, 12}}), Ellipse(visible = true, origin = {78, -0.27}, fillColor = {0, 255, 127}, fillPattern = FillPattern.Solid, extent = {{-12, -12}, {12, 12}}), Ellipse(visible = true, origin = {78, -40}, fillColor = {0, 255, 127}, fillPattern = FillPattern.Solid, extent = {{-12, -12}, {12, 12}}), Ellipse(visible = true, origin = {38, 0}, fillColor = {0, 255, 127}, fillPattern = FillPattern.Solid, extent = {{-12, -12}, {12, 12}}), Line(visible = true, origin = {57.369, 19.788}, points = {{-11.115, -10.219}, {11.115, 10.219}}, color = {0, 0, 255}, pattern = LinePattern.Dash, thickness = 1), Line(visible = true, origin = {57.548, -20.37}, points = {{-10.219, 10.577}, {10.219, -10.577}}, color = {0, 0, 255}, pattern = LinePattern.Dash, thickness = 1), Line(visible = true, origin = {58.166, -0.112}, points = {{-8.166, 0}, {8.166, 0}}, color = {0, 0, 255}, pattern = LinePattern.Dash, thickness = 1)}));
+end ROS_Sampler;
